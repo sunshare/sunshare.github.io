@@ -36,23 +36,25 @@ Phonegap经过发展，提取、整理了核心代码提交到Apache基金组织
 打开`Help -> Install New Software... -> Available Software Sites`,添加Google Android下载站点`https://dl-ssl.google.com/android/eclipse/`。
 
 安装：
-* `Android DDMS`
-* `Android Development Tools`
-* `Android Hierarchy Viewer`
-* `Android Native Development Tools`
-* `Android Traceview`
-* `Tracer for OPenGL ES`
+* Android DDMS
+* Android Development Tools
+* Android Hierarchy Viewer
+* Android Native Development Tools
+* ndroid Traceview
+* Tracer for OPenGL ES
 
 
 ### 安装Cordova
 使用npm安装Cordova。
 
 
-#### 安装node-0.10.xx
+1) 安装node-0.10.xx
+
 在[nodejs下载页](https://nodejs.org/download/)找到[other releases](http://nodejs.org/dist/)，下载0.10.xx版本（Cordova要求版本）。
 
 
-#### 安装cnpm，使用淘宝node源
+2) 安装cnpm，使用淘宝node源
+
 在[淘宝npm源站](http://npm.taobao.org/),找到安装信息。
 
 打开命令行终端，安装`cnpm`：
@@ -62,7 +64,8 @@ Phonegap经过发展，提取、整理了核心代码提交到Apache基金组织
 之后使用`cnpm`安装node模块，可以从淘宝npm源下载。
 
 
-#### 安装cordova
+3) 安装cordova
+
 参考[Cordova -> The Command-Line Interface](https://cordova.apache.org/docs/en/4.0.0/guide_cli_index.md.html#The%20Command-Line%20Interface)。
 
    `cnpm install -g cordova`
