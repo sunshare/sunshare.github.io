@@ -36,6 +36,7 @@ Phonegap经过发展，提取、整理了核心代码提交到Apache基金组织
 打开`Help -> Install New Software... -> Available Software Sites`,添加Google Android下载站点`https://dl-ssl.google.com/android/eclipse/`。
 
 安装：
+
 * Android DDMS
 * Android Development Tools
 * Android Hierarchy Viewer
