@@ -7,7 +7,7 @@ description: > # this means to ignore newlines until "baseurl:"
   不断尝试，做正确的事
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://sunshare.github.io" # the base hostname & protocol for your site
-twitter_username: NONE
+# twitter_username: NONE
 github_username:  sunshare
 
 # Build settings
