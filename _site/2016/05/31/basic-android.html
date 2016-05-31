@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>学习，实践，分享</title>
-  <meta name="description" content="健康生活 积极工作 不断尝试，做正确的事
-">
+  <title>Android基础笔记</title>
+  <meta name="description" content="文档  http://wear.techbrood.com/index.html  http://www.androiddevtools.cn/  http://android-mirror.bugly.qq.com:8080/  http://www.android-studio.org/">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://sunshare.github.io/">
+  <link rel="canonical" href="http://sunshare.github.io/2016/05/31/basic-android.html">
   <link rel="alternate" type="application/rss+xml" title="学习，实践，分享" href="http://sunshare.github.io/feed.xml" />
 </head>
 
@@ -55,47 +54,57 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title">Android基础笔记</h1>
+    <p class="post-meta">May 31, 2016</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">May 31, 2016</span>
+  <article class="post-content">
+    <h2 id="section">文档</h2>
+<ul>
+  <li>http://wear.techbrood.com/index.html</li>
+  <li>http://www.androiddevtools.cn/</li>
+  <li>http://android-mirror.bugly.qq.com:8080/</li>
+  <li>http://www.android-studio.org/</li>
+</ul>
 
-        <h2>
-          <a class="post-link" href="/2016/05/31/basic-android.html">Android基础笔记</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 30, 2016</span>
+<h2 id="section-1">环境搭建</h2>
+<p><strong>工具下载</strong>
+- <a href="http://android-mirror.bugly.qq.com:8080/AndroidStudio/">http://android-mirror.bugly.qq.com:8080/AndroidStudio/</a></p>
 
-        <h2>
-          <a class="post-link" href="/server/2016/05/30/update-svn-directory-structure.html">调整svn目录结构</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 30, 2016</span>
+<p><strong>国内SDK源镜像</strong>
+- android-mirror.bugly.qq.com:8080
+- mirrors.neusoft.edu.cn:80
+- mirrors.opencas.cn:80</p>
 
-        <h2>
-          <a class="post-link" href="/jekyll/update/2016/05/30/sql-field-with-NULL.html">SQL操作条件字段包含NULL值情况</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Apr 27, 2015</span>
+<p><strong>配置国内镜像</strong></p>
 
-        <h2>
-          <a class="post-link" href="/html5/mobile/tutorial/2015/04/27/getting-start-phonegap-cordova.html">Phonegap/Cordova 入门笔记</a>
-        </h2>
-      </li>
-    
-  </ul>
+<div class="highlighter-rouge"><pre class="highlight"><code>[Tools] -&gt; [Options] 
+    [Proxy Settings]
+        [HTTP Proxy Server]      
+        [HTTP Proxy Port]    
+    [Others]
+        [Force ...] checked
 
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+[Packages] -&gt; [Reload]
+</code></pre>
+</div>
+
+<h2 id="section-2">报错</h2>
+
+<p><strong>emulator: ERROR: x86 emulation currently requires</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>emulator: ERROR: x86 emulation currently requires hardware acceleration!Please ensure Intel HAXM is properly installed and usable.CPU acceleration status: HAX kernel module is not installed!
+</code></pre>
+</div>
+
+<ul>
+  <li>http://www.cnblogs.com/csulennon/p/4178404.html</li>
+</ul>
+
+  </article>
 
 </div>
 
