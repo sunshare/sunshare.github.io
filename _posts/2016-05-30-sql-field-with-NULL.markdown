@@ -2,7 +2,7 @@
 layout: post
 title:  "SQL操作条件字段包含NULL值情况"
 date:   2016-05-30 17:58
-categories: jekyll update
+tags: sql tips
 ---
 
 

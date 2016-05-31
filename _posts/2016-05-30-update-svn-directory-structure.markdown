@@ -2,7 +2,7 @@
 layout: post
 title:  "调整svn目录结构"
 date:   2016-05-30 18:04
-categories: server
+tags: server tips
 ---
 
 

@@ -2,7 +2,7 @@
 layout: post
 title:  "Phonegap/Cordova 入门笔记"
 date:   2015-04-27 11:24:00
-categories: html5 mobile tutorial
+tags: html5 mobile tutorial
 ---
 
 ## 关键词
