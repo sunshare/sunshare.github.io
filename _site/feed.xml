@@ -6,9 +6,144 @@
 </description>
     <link>http://sunshare.github.io/</link>
     <atom:link href="http://sunshare.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 31 May 2016 19:58:16 +0800</pubDate>
-    <lastBuildDate>Tue, 31 May 2016 19:58:16 +0800</lastBuildDate>
+    <pubDate>Tue, 31 May 2016 20:25:15 +0800</pubDate>
+    <lastBuildDate>Tue, 31 May 2016 20:25:15 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>基础环境搭建</title>
+        <description>&lt;p&gt;基础环境搭建&lt;/p&gt;
+
+&lt;h2 id=&quot;ruby&quot;&gt;Ruby&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 安装rvm
+curl -sSL https://get.rvm.io | bash -s stable
+
+// 引入环境定义。 
+// 注意：这个，因系统环境不一致，请根据提示操作。
+source ~/.profile
+
+// 查看可用的ruby版本
+rvm list known
+
+// 安装 指定版本（这里安装1.9.2）
+rvm install 1.9.2
+
+// 为特定工作环境定义gemset
+rvm --create 1.9.2@jekyll
+
+// 使用阿里gem源
+gem source -r https://rubygems.org/
+gem source -a http://mirrors.aliyun.com/rubygems/
+
+// rails项目 使用阿里gem源
+source &#39;http://mirrors.aliyun.com/rubygems/&#39;
+gem &#39;rails&#39;, &#39;4.0.2&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;参考&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://rvm.io/rvm/install&quot;&gt;RVM&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://mirrors.aliyun.com/help/rubygems&quot;&gt;阿里gem源站&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;python&quot;&gt;Python&lt;/h2&gt;
+
+&lt;h3 id=&quot;virtualenv&quot;&gt;Virtualenv&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo yum install -y python-pip
+
+sudo pip install virtualenv
+
+// 创建一个新工作环境 helloworld
+// --no-site-packages 这个选项忽略全局安装的包
+// 所有在此环境需要的包，都会独立安装到此环境下
+virtualenv -p /usr/bin/python2.7 helloworld
+
+// 激活helloworld环境
+source helloworld/bin/activate
+pip install requests
+
+// 退出helloworld环境
+deactivate 
+
+// 导出当前工作环境配置列表
+pip freeze &amp;gt; requirements.txt
+
+// 重建工作环境
+pip install -r requirements.txt
+
+// virtualenvwrapper
+// ref : http://virtualenvwrapper.readthedocs.org/en/latest/command_ref.html
+pip install virtualenvwrapper
+export WORKON_HOME=~/pyenv
+source /usr/local/bin/virtualenvwrapper.sh
+mkvirtualenv helloworld
+
+// 使用国内pip源站
+// http://mirrors.aliyun.com/pypi/simple
+/etc/pip.conf
+    [global]
+    index-url = http://pypi.douban.com/simple
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;参考&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://virtualenv.readthedocs.org/en/latest/installation.html&quot;&gt;安装&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/cmsd/p/3677412.html&quot;&gt;国内pip源站&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;http://mirrors.aliyun.com/pypi/simple&quot;&gt;Ali&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;http://pypi.douban.com/simple&quot;&gt;Douban&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pip.pypa.io/en/latest/user_guide.html&quot;&gt;pip用户手册&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;服务器基础环境&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 系统启动模式，runlevel,init,telinit
+/etc/inittab
+
+// 系统服务脚本
+/etc/init.d/nginx
+
+// 启动服务
+service nginx restart
+
+// 系统启动时，自启动服务
+chkconfig --level 345 nginx on
+chkconfig --list 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;ntp&quot;&gt;NTP&lt;/h2&gt;
+
+&lt;h2 id=&quot;nginx&quot;&gt;Nginx&lt;/h2&gt;
+
+&lt;h2 id=&quot;php&quot;&gt;PHP&lt;/h2&gt;
+
+&lt;h2 id=&quot;jekyll-&quot;&gt;Jekyll 文档系统&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;系统工具备忘&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;init&lt;/em&gt; 更改系统运行级别 /etc/inittab&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;iperf3&lt;/em&gt; 网络带宽工具&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;chkconfig&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;service&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 31 May 2016 20:05:00 +0800</pubDate>
+        <link>http://sunshare.github.io/2016/05/31/setup-basic-environment.html</link>
+        <guid isPermaLink="true">http://sunshare.github.io/2016/05/31/setup-basic-environment.html</guid>
+        
+        <category>tips</category>
+        
+        
+      </item>
     
       <item>
         <title>Android基础笔记</title>

@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>学习，实践，分享</title>
-  <meta name="description" content="健康生活 积极工作 不断尝试，做正确的事
-">
+  <title>基础环境搭建</title>
+  <meta name="description" content="基础环境搭建">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://sunshare.github.io/">
+  <link rel="canonical" href="http://sunshare.github.io/2016/05/31/setup-basic-environment.html">
   <link rel="alternate" type="application/rss+xml" title="学习，实践，分享" href="http://sunshare.github.io/feed.xml" />
 </head>
 
@@ -55,55 +54,139 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title">基础环境搭建</h1>
+    <p class="post-meta">May 31, 2016</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">May 31, 2016</span>
+  <article class="post-content">
+    <p>基础环境搭建</p>
 
-        <h2>
-          <a class="post-link" href="/2016/05/31/setup-basic-environment.html">基础环境搭建</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 31, 2016</span>
+<h2 id="ruby">Ruby</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>// 安装rvm
+curl -sSL https://get.rvm.io | bash -s stable
 
-        <h2>
-          <a class="post-link" href="/2016/05/31/basic-android.html">Android基础笔记</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 30, 2016</span>
+// 引入环境定义。 
+// 注意：这个，因系统环境不一致，请根据提示操作。
+source ~/.profile
 
-        <h2>
-          <a class="post-link" href="/2016/05/30/update-svn-directory-structure.html">调整svn目录结构</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 30, 2016</span>
+// 查看可用的ruby版本
+rvm list known
 
-        <h2>
-          <a class="post-link" href="/2016/05/30/sql-field-with-NULL.html">SQL操作条件字段包含NULL值情况</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Apr 27, 2015</span>
+// 安装 指定版本（这里安装1.9.2）
+rvm install 1.9.2
 
-        <h2>
-          <a class="post-link" href="/2015/04/27/getting-start-phonegap-cordova.html">Phonegap/Cordova 入门笔记</a>
-        </h2>
-      </li>
-    
-  </ul>
+// 为特定工作环境定义gemset
+rvm --create 1.9.2@jekyll
 
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+// 使用阿里gem源
+gem source -r https://rubygems.org/
+gem source -a http://mirrors.aliyun.com/rubygems/
+
+// rails项目 使用阿里gem源
+source 'http://mirrors.aliyun.com/rubygems/'
+gem 'rails', '4.0.2'
+</code></pre>
+</div>
+
+<p><strong>参考</strong></p>
+
+<ul>
+  <li><a href="https://rvm.io/rvm/install">RVM</a></li>
+  <li><a href="http://mirrors.aliyun.com/help/rubygems">阿里gem源站</a></li>
+</ul>
+
+<h2 id="python">Python</h2>
+
+<h3 id="virtualenv">Virtualenv</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo yum install -y python-pip
+
+sudo pip install virtualenv
+
+// 创建一个新工作环境 helloworld
+// --no-site-packages 这个选项忽略全局安装的包
+// 所有在此环境需要的包，都会独立安装到此环境下
+virtualenv -p /usr/bin/python2.7 helloworld
+
+// 激活helloworld环境
+source helloworld/bin/activate
+pip install requests
+
+// 退出helloworld环境
+deactivate 
+
+// 导出当前工作环境配置列表
+pip freeze &gt; requirements.txt
+
+// 重建工作环境
+pip install -r requirements.txt
+
+// virtualenvwrapper
+// ref : http://virtualenvwrapper.readthedocs.org/en/latest/command_ref.html
+pip install virtualenvwrapper
+export WORKON_HOME=~/pyenv
+source /usr/local/bin/virtualenvwrapper.sh
+mkvirtualenv helloworld
+
+// 使用国内pip源站
+// http://mirrors.aliyun.com/pypi/simple
+/etc/pip.conf
+    [global]
+    index-url = http://pypi.douban.com/simple
+</code></pre>
+</div>
+
+<p><strong>参考</strong></p>
+
+<ul>
+  <li><a href="http://virtualenv.readthedocs.org/en/latest/installation.html">安装</a></li>
+  <li><a href="http://www.cnblogs.com/cmsd/p/3677412.html">国内pip源站</a>
+    <ul>
+      <li><a href="http://mirrors.aliyun.com/pypi/simple">Ali</a></li>
+      <li><a href="http://pypi.douban.com/simple">Douban</a></li>
+    </ul>
+  </li>
+  <li><a href="https://pip.pypa.io/en/latest/user_guide.html">pip用户手册</a></li>
+</ul>
+
+<h2 id="section">服务器基础环境</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// 系统启动模式，runlevel,init,telinit
+/etc/inittab
+
+// 系统服务脚本
+/etc/init.d/nginx
+
+// 启动服务
+service nginx restart
+
+// 系统启动时，自启动服务
+chkconfig --level 345 nginx on
+chkconfig --list 
+</code></pre>
+</div>
+
+<h2 id="ntp">NTP</h2>
+
+<h2 id="nginx">Nginx</h2>
+
+<h2 id="php">PHP</h2>
+
+<h2 id="jekyll-">Jekyll 文档系统</h2>
+
+<h2 id="section-1">系统工具备忘</h2>
+
+<ul>
+  <li><em>init</em> 更改系统运行级别 /etc/inittab</li>
+  <li><em>iperf3</em> 网络带宽工具</li>
+  <li><em>chkconfig</em></li>
+  <li><em>service</em></li>
+</ul>
+
+  </article>
 
 </div>
 
