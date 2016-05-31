@@ -1,35 +1,227 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Your awesome title</title>
-    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+    <title>学习，实践，分享</title>
+    <description>健康生活 积极工作 不断尝试，做正确的事
 </description>
-    <link>http://yourdomain.com/</link>
-    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 07 Mar 2015 16:03:39 +0800</pubDate>
-    <lastBuildDate>Sat, 07 Mar 2015 16:03:39 +0800</lastBuildDate>
-    <generator>Jekyll v2.5.3</generator>
+    <link>http://sunshare.github.io/</link>
+    <atom:link href="http://sunshare.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 31 May 2016 19:31:25 +0800</pubDate>
+    <lastBuildDate>Tue, 31 May 2016 19:31:25 +0800</lastBuildDate>
+    <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>调整svn目录结构</title>
+        <description>&lt;p&gt;历史原因，目前svn目录结构没有按规范建立分支结构。&lt;br /&gt;
+现需要调整。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;调整目录结构&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;创建本地svn代码库oldsvn&lt;/p&gt;
+
+    &lt;p&gt;cd /data/svn&lt;br /&gt;
+ svnadmin create oldsvn&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;检出oldsvn，修改，提交&lt;/p&gt;
+
+    &lt;p&gt;cd /data/svn/
+ svn co file://localhost/data/svn/oldsvn oldcode&lt;/p&gt;
+
+    &lt;p&gt;cd /data/svn/oldcode&lt;br /&gt;
+ touch hello.txt&lt;br /&gt;
+ svn add hello.txt&lt;br /&gt;
+ svn commit -m ‘add hello.txt’&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;调整目录结构&lt;/p&gt;
+
+    &lt;p&gt;cd /data/svn/
+ mkdir tags branches trunk&lt;br /&gt;
+ svn add tags branches trunk&lt;br /&gt;
+ svn commit -m “add structure directory”&lt;br /&gt;
+ svn mv hello.txt trunk/&lt;br /&gt;
+ svn commit -m ‘rebuild directory structure’&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;代码库迁移&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;导出旧svn仓库oldsvn&lt;/p&gt;
+
+    &lt;p&gt;cd /data/svn&lt;br /&gt;
+ svnadmin dump /data/svn/oldsvn &amp;gt; oldsvn.dump&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;创建新仓库newsvn&lt;/p&gt;
+
+    &lt;p&gt;cd /data/svn&lt;br /&gt;
+ svnadmin create newsvn&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;导入就仓库oldsvn到新仓库newsvn&lt;/p&gt;
+
+    &lt;p&gt;cd /data/svn&lt;br /&gt;
+ svnadmin load newsvn &amp;lt; oldsvn.dump&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;参考&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;https://kromey.us/2011/06/move-an-svn-repository-from-one-server-to-another-433.html&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 30 May 2016 18:04:00 +0800</pubDate>
+        <link>http://sunshare.github.io/server/2016/05/30/update-svn-directory-structure.html</link>
+        <guid isPermaLink="true">http://sunshare.github.io/server/2016/05/30/update-svn-directory-structure.html</guid>
+        
+        
+        <category>server</category>
+        
+      </item>
+    
+      <item>
+        <title>SQL操作条件字段包含NULL值情况</title>
+        <description>&lt;p&gt;&lt;strong&gt;所有与&lt;code class=&quot;highlighter-rouge&quot;&gt;NULL&lt;/code&gt;值进行的 &lt;code class=&quot;highlighter-rouge&quot;&gt;比较&lt;/code&gt; 运算，结果都是 &lt;code class=&quot;highlighter-rouge&quot;&gt;NULL&lt;/code&gt;.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;这条sql &lt;strong&gt;不会&lt;/strong&gt; 返回 &lt;code class=&quot;highlighter-rouge&quot;&gt;CODE&lt;/code&gt; 值为 &lt;code class=&quot;highlighter-rouge&quot;&gt;NULL&lt;/code&gt;的记录：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;SELECT * from hello_table where CODE!=&#39;C&#39;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;正确的方式是这样：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;SELECT * from hello_table where CODE IS NULL OR CODE!=&#39;C&#39;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;http://stackoverflow.com/questions/9608639/mysql-comparison-with-null-value&lt;/li&gt;
+  &lt;li&gt;http://dev.mysql.com/doc/refman/5.7/en/working-with-null.html&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 30 May 2016 17:58:00 +0800</pubDate>
+        <link>http://sunshare.github.io/jekyll/update/2016/05/30/sql-field-with-NULL.html</link>
+        <guid isPermaLink="true">http://sunshare.github.io/jekyll/update/2016/05/30/sql-field-with-NULL.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>Phonegap/Cordova 入门笔记</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;关键词&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cordova.apache.org/&quot;&gt;Cordova&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://phonegap.com/&quot;&gt;PhoneGap&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.eclipse.org&quot;&gt;Eclipse&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;简介&lt;/h2&gt;
+&lt;p&gt;Phonegap/Cordova工具，可以帮助开发者，使用html5,css,javascript等常规web技术，开发智能手机应用。&lt;/p&gt;
+
+&lt;p&gt;目前支持苹果iOS，安卓Android，黑莓Blackberry，微软WP等平台。&lt;/p&gt;
+
+&lt;p&gt;Phonegap经过发展，提取、整理了核心代码提交到Apache基金组织管理，重命名为Cordova。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;安装&lt;/h2&gt;
+&lt;p&gt;这里主要介绍Android环境搭建，配合Cordova使用。&lt;/p&gt;
+
+&lt;h3 id=&quot;android-adt&quot;&gt;安装Android ADT&lt;/h3&gt;
+&lt;p&gt;在&lt;a href=&quot;&quot;&gt;Android开发&lt;/a&gt;上找到 &lt;code class=&quot;highlighter-rouge&quot;&gt;Develop -&amp;gt; tools -&amp;gt; Dowload&lt;/code&gt;, 单独&lt;a href=&quot;http://developer.android.com/sdk/index.html#Other&quot;&gt;下载ADT&lt;/a&gt;，选择对应平台，下载安装。&lt;/p&gt;
+
+&lt;p&gt;打开&lt;code class=&quot;highlighter-rouge&quot;&gt;Android SDK Manager&lt;/code&gt;，安装最新的SDK工具。&lt;/p&gt;
+
+&lt;p&gt;打开&lt;code class=&quot;highlighter-rouge&quot;&gt;Android SDK Manager -&amp;gt; Tools -&amp;gt; Mange ADVs... &lt;/code&gt;，创建一个模拟器。&lt;/p&gt;
+
+&lt;h3 id=&quot;eclipse&quot;&gt;安装Eclipse&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.eclipse.org/downloads/&quot;&gt;下载Eclipse&lt;/a&gt;开发套件。&lt;/p&gt;
+
+&lt;p&gt;打开&lt;code class=&quot;highlighter-rouge&quot;&gt;Help -&amp;gt; Install New Software... -&amp;gt; Available Software Sites&lt;/code&gt;,添加Google Android下载站点&lt;code class=&quot;highlighter-rouge&quot;&gt;https://dl-ssl.google.com/android/eclipse/&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;安装：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Android DDMS&lt;/li&gt;
+  &lt;li&gt;Android Development Tools&lt;/li&gt;
+  &lt;li&gt;Android Hierarchy Viewer&lt;/li&gt;
+  &lt;li&gt;Android Native Development Tools&lt;/li&gt;
+  &lt;li&gt;ndroid Traceview&lt;/li&gt;
+  &lt;li&gt;Tracer for OPenGL ES&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cordova&quot;&gt;安装Cordova&lt;/h3&gt;
+&lt;p&gt;使用npm安装Cordova。&lt;/p&gt;
+
+&lt;p&gt;1) 安装node-0.10.xx&lt;/p&gt;
+
+&lt;p&gt;在&lt;a href=&quot;https://nodejs.org/download/&quot;&gt;nodejs下载页&lt;/a&gt;找到&lt;a href=&quot;http://nodejs.org/dist/&quot;&gt;other releases&lt;/a&gt;，下载0.10.xx版本（Cordova要求版本）。&lt;/p&gt;
+
+&lt;p&gt;2) 安装cnpm，使用淘宝node源&lt;/p&gt;
+
+&lt;p&gt;在&lt;a href=&quot;http://npm.taobao.org/&quot;&gt;淘宝npm源站&lt;/a&gt;,找到安装信息。&lt;/p&gt;
+
+&lt;p&gt;打开命令行终端，安装&lt;code class=&quot;highlighter-rouge&quot;&gt;cnpm&lt;/code&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install -g cnpm --registry=https://registry.npm.taobao.org&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;之后使用&lt;code class=&quot;highlighter-rouge&quot;&gt;cnpm&lt;/code&gt;安装node模块，可以从淘宝npm源下载。&lt;/p&gt;
+
+&lt;p&gt;3) 安装cordova&lt;/p&gt;
+
+&lt;p&gt;参考&lt;a href=&quot;https://cordova.apache.org/docs/en/4.0.0/guide_cli_index.md.html#The%20Command-Line%20Interface&quot;&gt;Cordova -&amp;gt; The Command-Line Interface&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cnpm install -g cordova&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;使用示例&lt;/h2&gt;
+&lt;p&gt;参考&lt;a href=&quot;https://cordova.apache.org/docs/en/4.0.0/guide_cli_index.md.html#The%20Command-Line%20Interface&quot;&gt;Cordova -&amp;gt; The Command-Line Interface&lt;/a&gt;。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cordova create hello com.example.hello HelloWorld
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;hello
+cordova platform add android
+cordova build android
+cordova emulate android
+&lt;span class=&quot;c&quot;&gt;#=&amp;gt; 在模拟器中打开测试项目`HelloWorld`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+</description>
+        <pubDate>Mon, 27 Apr 2015 19:24:00 +0800</pubDate>
+        <link>http://sunshare.github.io/html5/mobile/tutorial/2015/04/27/getting-start-phonegap-cordova.html</link>
+        <guid isPermaLink="true">http://sunshare.github.io/html5/mobile/tutorial/2015/04/27/getting-start-phonegap-cordova.html</guid>
+        
+        
+        <category>html5</category>
+        
+        <category>mobile</category>
+        
+        <category>tutorial</category>
+        
+      </item>
     
       <item>
         <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
 
 &lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Tom&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &amp;#39;Hi, Tom&amp;#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;Jekyll’s dedicated Help repository&lt;/a&gt;.&lt;/p&gt;
 
 </description>
         <pubDate>Sat, 10 Jan 2015 16:00:02 +0800</pubDate>
-        <link>http://yourdomain.com/jekyll/update/2015/01/10/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/jekyll/update/2015/01/10/welcome-to-jekyll.html</guid>
+        <link>http://sunshare.github.io/jekyll/update/2015/01/10/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://sunshare.github.io/jekyll/update/2015/01/10/welcome-to-jekyll.html</guid>
         
         
         <category>jekyll</category>
