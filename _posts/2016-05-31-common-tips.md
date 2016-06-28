@@ -11,34 +11,49 @@ tags: tips
     // trace into all fpm threads  
     ps -ef | grep fpm | awk '{print "-p " $2}' | xargs strace
 
-
-    // 挂载为指定用户  
+    // virtualbox共享文件夹 挂载为指定用户  
     work.src    /media/sf_work.src    vboxsf    gid=500,uid=500,umask=022,rw    0   0
-    
 
     // Timestamp
     date +%s --date='2015-11-10 15:16:12'
-    date -d @1372993650
-
+    date -d '@1372993650'
 
     // vi
     :w  !sudo   tee  %
 
 
-**DUMP DATABASE**
+## vimrc
+
+    set nu
+    syntax on
+    set ruler " status bar
+
+    set tabstop=4 " the number of space when repace tab
+    set shiftwidth=4 " indent space number
+    set expandtab " replace tab with space
+
+
+## Database
+
+### DUMP DATABASE
+
 {% highlight sql %}
 mysqldump -hlocalhost -uhello -pxxxx dbname --tables userinfo | gzip --fast > dbname-userinfo.gz
 gzip -d -c dbname-userinfo.gz | mysql -h192.168.1.2 -uhello -pxxxx  dbname
 {% endhighlight %}
 
-**CREATE DATABASE**
+
+### CREATE DATABASE
+
 {% highlight sql %}
 create database test default collate 'utf8_general_ci' default character set 'utf8';
 grant all on test.*  to 'hello'@'localhost';
 set password for 'hello'@'localhost' = password('hello');
 {% endhighlight %}
 
-**建表** 
+
+### CREATE TABLE
+
 {% highlight sql %}
 create table `comment`(
     `id` int unsigned not null auto_increment comment 'primary key',
@@ -63,3 +78,30 @@ create table `comment`(
   - <http://dev.maxmind.com/geoip/legacy/geolite/>  
   - **<http://freegeoip.net/>**  
   - **<https://github.com/fiorix/freegeoip>**  
+
+
+## 批量更新svn代码
+
+    #!/bin/sh
+    # Filename  :   svnup
+    # Author    :   Xuxiao<sunshareall0709@aliyun.com>
+    # Date      :   2016-06-24
+
+    SVN_USERNAME='yourname'
+    SVN_PASSWORD='password'
+    SVN_BASE_DIR='/home/yourname/code/'
+
+    BASE_DIR=`pwd`
+    for repo in `ls ${SVN_BASE_DIR}`
+    do
+      REPO_DIR=${SVN_BASE_DIR}${repo}
+
+      echo "[UPDATE] ${REPO_DIR}"
+      cd ${REPO_DIR}
+      svn up -q --no-auth-cache  --username=${SVN_USERNAME} --password=${SVN_PASSWORD}
+
+      sleep 1
+    done
+
+    cd ${BASE_DIR}
+    exit 0;
