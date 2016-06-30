@@ -2,35 +2,33 @@
 layout: post
 title: '基础环境搭建'
 date: 2016-05-31 20:05
-tags: tips
+tags: tips ruby jekyll python pip
 ---
 
-基础环境搭建
 
-## Ruby
-    // 安装rvm
-    curl -sSL https://get.rvm.io | bash -s stable
+## 安装Ruby环境
 
-    // 引入环境定义。 
-    // 注意：这个，因系统环境不一致，请根据提示操作。
-    source ~/.profile
+{% highlight bash %}
+# 安装rvm
+curl -sSL https://get.rvm.io | bash -s stable
 
-    // 查看可用的ruby版本
-    rvm list known
-    
-    // 安装 指定版本（这里安装1.9.2）
-    rvm install 1.9.2
+# 引入环境定义。 
+# 注意：这个，因系统环境不一致，请根据提示操作。
+source ~/.profile
 
-    // 为特定工作环境定义gemset
-    rvm --create 1.9.2@jekyll
+# 查看可用的ruby版本
+rvm list known
 
-    // 使用阿里gem源
-    gem source -r https://rubygems.org/
-    gem source -a http://mirrors.aliyun.com/rubygems/
-    
-    // rails项目 使用阿里gem源
-    source 'http://mirrors.aliyun.com/rubygems/'
-    gem 'rails', '4.0.2'
+# 安装 指定版本（这里安装1.9.2）
+rvm install 1.9.2
+
+# 为特定工作环境定义gemset
+rvm --create 1.9.2@jekyll
+
+# 使用阿里gem源
+gem source -r https://rubygems.org/
+gem source -a http://mirrors.aliyun.com/rubygems/
+{% endhighlight %}
 
 
 **参考**
@@ -109,7 +107,65 @@ tags: tips
 
 ## PHP
 
-## Jekyll 文档系统
+## Jekyll 文档系统  
+
+参考本文 **Ruby** 章节准备好基础环境。   
+
+**安装Jekyll**    
+
+{% highlight bash %}
+rvm --create 2.2.4@jekyll  
+rvm use 2.2.4@jekyll  
+gem install jekyll  
+{% endhighlight %}
+
+
+**准备Github帐号**   
+
+- 注册Github帐号<https://github.com/>, 帐号名: `eellyphp`    
+- 配置密钥到[Github](https://github.com/settings/keys)    
+{% highlight bash %}
+ssh-keygen -t rsa -b 4096 -C 'eellyphp@eelly.net'  
+# copy ~/.ssh/id_rsa.pub  
+# 配置到Github
+{% endhighlight %}
+
+
+**创建Jekyll文档系统**  
+
+参考 **<http://jekyll.bootcss.com/>**.  
+
+- 创建文档库<https://github.com/new>  *`eellyphp.github.io`*  
+- 检出文档库到本地  
+`git clone git@github.com:eellyphp/eellyphp.github.io.git`     
+
+- 创建jekyll文档项目  
+{% highlight base %}
+cd eelly.github.io/  
+jekyll new ./
+
+ls .
+
+[eelly@invo eellyphp]$ ll
+total 36
+-rw-r--r-- 1 eelly eelly  536 Jun  1 14:20 about.md 	# About Page
+-rw-r--r-- 1 eelly eelly  891 Jun  1 14:20 _config.yml 	# Jekyll Config
+drwxrwxr-x 2 eelly eelly 4096 Jun  1 14:20 css
+-rw-r--r-- 1 eelly eelly 1291 Jun  1 14:20 feed.xml
+drwxrwxr-x 2 eelly eelly 4096 Jun  1 14:20 _includes	# 模板文件
+-rw-r--r-- 1 eelly eelly  506 Jun  1 14:20 index.html
+drwxrwxr-x 2 eelly eelly 4096 Jun  1 14:20 _layouts	# 布局模板
+drwxrwxr-x 2 eelly eelly 4096 Jun  1 14:20 _posts	# 默认文章目录
+drwxrwxr-x 2 eelly eelly 4096 Jun  1 14:20 _sass
+{% endhighlight %}
+
+
+**启动本地服务**  
+
+`jekyll build`  
+`jekyll server -H 192.168.1.10 -P 8080 -B -w --safe -q`
+
+打开浏览器访问<http://192.168.1.10:8080>.
 
 
 ## 系统工具备忘
