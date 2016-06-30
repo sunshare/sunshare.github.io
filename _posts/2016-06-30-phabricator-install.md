@@ -116,6 +116,10 @@ date    : 2016-06-30 00:30
     done
 
 
+## 保持更新upgrade
+- [Upgrading Phabricator](https://secure.phabricator.com/book/phabricator/article/upgrading/)
+
+
 ## Diffusion
 
 - [Diffusion](https://secure.phabricator.com/book/phabricator/article/diffusion_managing/)
