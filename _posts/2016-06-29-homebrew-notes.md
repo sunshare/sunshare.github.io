@@ -39,14 +39,13 @@ date  : 2016-06-29 03:08
 
 # 替换国内源
 
-- [知乎问题](http://www.zhihu.com/question/31360766)
-- [中国科学技术大学utsc源](https://lug.ustc.edu.cn/wiki/mirrors/help)
+- [知乎问题](http://www.zhihu.com/question/31360766)  
+- [中国科学技术大学utsc源](https://lug.ustc.edu.cn/wiki/mirrors/help)  
 
-
-    # 替换git镜像  
+    // 替换git镜像  
     cd /usr/local  
     git remote set-url origin git://mirrors.ustc.edu.cn/homebrew.git  
     
-    # 替换bottles二进制源  
+    // 替换bottles二进制源  
     echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' >> ~/.bash_profile  
     source ~/.bash_profile  
