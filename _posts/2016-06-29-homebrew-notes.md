@@ -43,8 +43,8 @@ date  : 2016-06-29 03:08
 - [中国科学技术大学utsc源](https://lug.ustc.edu.cn/wiki/mirrors/help)  
 
     // 替换git镜像  
-    cd /usr/local  
-    git remote set-url origin git://mirrors.ustc.edu.cn/homebrew.git  
+    cd "$(brew --repo)"  
+    git remote set-url origin git://mirrors.ustc.edu.cn/brew.git 
     
     // 替换bottles二进制源  
     echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' >> ~/.bash_profile  
