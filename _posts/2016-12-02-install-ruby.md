@@ -6,6 +6,7 @@ date: 2016-12-02 20:31
 
 
 {% highlight bash %}
+
 # 安装rvm
 curl -sSL https://get.rvm.io | bash -s stable
 
@@ -25,6 +26,7 @@ rvm --create 1.9.2@jekyll
 # 使用阿里gem源
 gem source -r https://rubygems.org/
 gem source -a http://mirrors.aliyun.com/rubygems/
+
 {% endhighlight %}
 
 
