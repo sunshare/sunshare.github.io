@@ -24,8 +24,9 @@
 }
 
 .site-nav {
-    float: right;
+    float: left;
     line-height: 56px;
+    margin-left: 40px;
 
     .menu-icon {
         display: none;
@@ -87,6 +88,12 @@
 }
 
 
+/* baidu search */
+.baidu-search {
+    float: right;
+    line-height: 56px;
+    padding: 14px;
+}
 
 /**
  * Site footer
