@@ -4,7 +4,9 @@ title: '安装Python环境'
 date: 2016-12-02 20:53
 ---
 
-{% highligtht bash %}
+# 安装Python环境
+
+{% highlight bash %}
 
     sudo yum install -y python-pip
 

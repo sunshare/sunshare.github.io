@@ -4,6 +4,8 @@ title: '安装Ruby环境'
 date: 2016-12-02 20:31
 ---
 
+ 
+# 安装Ruby环境
 
 {% highlight bash %}
 
