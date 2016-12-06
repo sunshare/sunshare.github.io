@@ -47,8 +47,12 @@ gzip -d -c dbname-userinfo.gz | mysql -h192.168.1.2 -uhello -pxxxx  dbname
 
 {% highlight sql %}
 create database test default collate 'utf8_general_ci' default character set 'utf8';
+
 grant all on test.*  to 'hello'@'localhost';
+
 set password for 'hello'@'localhost' = password('hello');
+
+flush privileges;
 {% endhighlight %}
 
 
