@@ -12,3 +12,6 @@ github_username:  sunshare
 
 # Build settings
 markdown: kramdown
+
+gems:
+  - jekyll-sitemap
