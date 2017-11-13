@@ -83,6 +83,8 @@ create table `comment`(
   - **<http://freegeoip.net/>**  
   - **<https://github.com/fiorix/freegeoip>**  
 
+## node 替换taobao源
+`npm config set -g registry "https://registry.npm.taobao.org/"`
 
 ## 批量更新svn代码
 
