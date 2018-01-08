@@ -1,0 +1,37 @@
+
+```bash
+##clone svn -> git  地址支持协议 : svn://, http://, https://. 注意这个 URL 应该指向项目的 base repository，例如 
+##http://svn.mycompany.com/myrepo/repository. 不要指到了 /trunk, /tag 或 /branches 里。
+## -s 选项，指明svn采用标准目录结构.
+git svn clone svn://10.68.245.11/tclshop --authors-file=users.txt --no-metadata -s dufy-move 
+
+##进入clone 的文件夹
+cd dfuy-move 
+
+##使所有的 SVN commit 都被抓下来了
+git svn fetch
+
+##在git中查看svn commit记录信息
+git log --pretty=oneline
+
+##查看分支 -- svn tag的被解析为git分支 ，需转换一下
+git branch -r 
+
+##转换分支-tag  
+git tag tags_20160329_hg origin/tags/tags_20160329_hg  
+
+##删除远程的分支（tags）
+git branch -r -d origin/tags/tags_20160329_hg   
+
+##本地初始化git仓库完成
+git remote add origin git@10.68.25.20:move/dufy-tclshop-test-two.git 
+
+#推送到远端的git的仓库中
+git push origin master --tags
+
+##切换到分支
+git checkout 16130_20151125_hg 
+
+##提交分支到远程的仓库中
+git push origin 16130_20151125_hg 
+```
