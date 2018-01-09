@@ -111,3 +111,11 @@ create table `comment`(
 
     cd ${BASE_DIR}
     exit 0;
+
+## Install Oracle JDK for Ubuntu
+- [INSTALL ORACLE JAVA 8 IN UBUNTU OR LINUX MINT VIA PPA REPOSITORY JDK8](http://www.webupd8.org/2012/09/install-oracle-java-8-in-ubuntu-via-ppa.html)
+
+    sudo add-apt-repository ppa:webupd8team/java
+    sudo apt-get update
+    sudo apt-get install oracle-java8-installer
+    sudo apt-get install oracle-java8-set-default
