@@ -37,15 +37,15 @@ tags: tips
 
 ### DUMP DATABASE
 
-{% highlight sql %}
+```
 mysqldump -hlocalhost -uhello -pxxxx dbname --tables userinfo | gzip --fast > dbname-userinfo.gz
 gzip -d -c dbname-userinfo.gz | mysql -h192.168.1.2 -uhello -pxxxx  dbname
-{% endhighlight %}
+```
 
 
 ### CREATE DATABASE
 
-{% highlight sql %}
+```
 create database test default collate 'utf8_general_ci' default character set 'utf8';
 
 grant all on test.*  to 'hello'@'localhost';
@@ -53,12 +53,12 @@ grant all on test.*  to 'hello'@'localhost';
 set password for 'hello'@'localhost' = password('hello');
 
 flush privileges;
-{% endhighlight %}
+```
 
 
 ### CREATE TABLE
 
-{% highlight sql %}
+```
 create table `comment`(
     `id` int unsigned not null auto_increment comment 'primary key',
     `type` tinyint unsigned not null default 0 comment 'xxx',
@@ -67,7 +67,7 @@ create table `comment`(
     primary key (id),
     index `idx_r` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评论表';
-{% endhighlight %}
+```
 
 
 
@@ -87,35 +87,38 @@ create table `comment`(
 `npm config set -g registry "https://registry.npm.taobao.org/"`
 
 ## 批量更新svn代码
+```
+#!/bin/sh
+# Filename  :   svnup
+# Author    :   Xuxiao<sunshareall0709@aliyun.com>
+# Date      :   2016-06-24
 
-    #!/bin/sh
-    # Filename  :   svnup
-    # Author    :   Xuxiao<sunshareall0709@aliyun.com>
-    # Date      :   2016-06-24
+SVN_USERNAME='yourname'
+SVN_PASSWORD='password'
+SVN_BASE_DIR='/home/yourname/code/'
 
-    SVN_USERNAME='yourname'
-    SVN_PASSWORD='password'
-    SVN_BASE_DIR='/home/yourname/code/'
+BASE_DIR=`pwd`
+for repo in `ls ${SVN_BASE_DIR}`
+do
+  REPO_DIR=${SVN_BASE_DIR}${repo}
 
-    BASE_DIR=`pwd`
-    for repo in `ls ${SVN_BASE_DIR}`
-    do
-      REPO_DIR=${SVN_BASE_DIR}${repo}
+  echo "[UPDATE] ${REPO_DIR}"
+  cd ${REPO_DIR}
+  svn up -q --no-auth-cache  --username=${SVN_USERNAME} --password=${SVN_PASSWORD}
 
-      echo "[UPDATE] ${REPO_DIR}"
-      cd ${REPO_DIR}
-      svn up -q --no-auth-cache  --username=${SVN_USERNAME} --password=${SVN_PASSWORD}
+  sleep 1
+done
 
-      sleep 1
-    done
-
-    cd ${BASE_DIR}
-    exit 0;
+cd ${BASE_DIR}
+exit 0;
+```
 
 ## Install Oracle JDK for Ubuntu
 - [INSTALL ORACLE JAVA 8 IN UBUNTU OR LINUX MINT VIA PPA REPOSITORY JDK8](http://www.webupd8.org/2012/09/install-oracle-java-8-in-ubuntu-via-ppa.html)
 
-    sudo add-apt-repository ppa:webupd8team/java
-    sudo apt-get update
-    sudo apt-get install oracle-java8-installer
-    sudo apt-get install oracle-java8-set-default
+```
+sudo add-apt-repository ppa:webupd8team/java   
+sudo apt-get update 
+sudo apt-get install oracle-java8-installer
+sudo apt-get install oracle-java8-set-default
+```
