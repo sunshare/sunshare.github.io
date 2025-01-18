@@ -18,4 +18,5 @@ sudo apt-get update
 sudo apt-get install typora
 ```
 
-Refer: [https://typora.io/#linux](https://typora.io/#linux)
+## References
+- [https://typora.io/#linux](https://typora.io/#linux)
